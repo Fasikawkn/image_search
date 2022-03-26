@@ -57,7 +57,7 @@ def findImage(my_image):
 
   batch_size = 64
   img_size = 224
-  root_dir = 'media/new_one'
+  root_dir = 'medias/new_one'
   img_gen = ImageDataGenerator(preprocessing_function=preprocess_input)
   datagen = img_gen.flow_from_directory(root_dir,
                                         target_size=(img_size, img_size),
