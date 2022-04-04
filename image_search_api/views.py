@@ -28,12 +28,12 @@ from sklearn.decomposition import PCA
 class FileView(APIView):
     # query = File.objects.get()
     # serializer = FileSerializer
-  
+  parser_classes = (MultiPartParser, FormParser)
   def get(self, request, *args, **kwargs):
       files = File.objects.get()
       serializer = FileSerializer(files, many = True)
       return Response(serializer.data, status=status.HTTP_200_OK)
-  parser_classes = (MultiPartParser, FormParser)
+ 
 
   def post(self, request, *args, **kwargs):
     file_serializer = FileSerializer(data=request.data)
@@ -41,10 +41,11 @@ class FileView(APIView):
       file_serializer.save()
       print('The image is ',file_serializer.data['file']) 
       similar_images = findImage('./'+file_serializer.data['file'])
-      data = 'http://localhost:8000/'+file_serializer.data['file']
+      data = 'http://localhost:8000'+file_serializer.data['file']
       print('The similar image array is ', similar_images)
       return Response(similar_images, status=status.HTTP_201_CREATED)
     else:
+      print('file serializer error', file_serializer.errors)
       return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
