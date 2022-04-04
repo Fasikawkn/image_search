@@ -42,7 +42,6 @@ class FileView(APIView):
       print('The image is ',file_serializer.data['file']) 
       similar_images = findImage('./'+file_serializer.data['file'])
       data = 'http://localhost:8000'+file_serializer.data['file']
-      print('The similar image array is ', similar_images)
       return Response(similar_images, status=status.HTTP_201_CREATED)
     else:
       print('file serializer error', file_serializer.errors)
