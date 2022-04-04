@@ -1,5 +1,5 @@
-# cat .slugignore
-
+# Heres a comment
+*.psd
+*.pdf
 /test
 /spec
-/docs
